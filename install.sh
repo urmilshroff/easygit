@@ -4,7 +4,7 @@ if [ $(uname) == "Darwin" ] #macOS installation
 then
     if [ -f /usr/local/bin/easygit ] #check if already installed
     then
-        echo -e "\EasyGit is already installed. Run it at any time using 'easygit'."
+        echo -e "EasyGit is already installed. Run it at any time using 'easygit'."
         
     else #not installed, continue installing
         echo -e "\nDo you want to continue installation? Y/N"
@@ -23,6 +23,6 @@ then
         fi
     fi
     
-elif [ $(uname) == "Linux" ]
+else
     echo -e "Installation on Linux not yet supported (send PR!)"
 fi
