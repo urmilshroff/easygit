@@ -10,6 +10,17 @@ upload()
     read commit_message
     git commit -m "$commit_message"
     git push
+    
+    pid=$! # Process ID of the previous running command
+    spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    i=0
+    
+    while kill -0 $pid 2>/dev/null
+    do
+      i=$(( (i+1) %10 ))
+      printf "\r${spin:$i:1} Pushing to GitHub..."
+      sleep .1
+    done
     echo "Successfully uploaded changed files!"
 }
 
