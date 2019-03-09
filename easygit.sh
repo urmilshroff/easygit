@@ -17,6 +17,7 @@ upload()
 
     is_success=$(git push | tail -1)
     debug
+    echo $is_success
 
     if [ $is_success = "nothing to commit, working tree clean" ]
     then
