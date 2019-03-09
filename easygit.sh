@@ -3,8 +3,8 @@
 debug()
 {
     echo "Debug output starts"
-    # echo $is_success
-    echo $backup
+    echo $is_success
+    # echo $backup
     echo "Debug output ends"
 }
 
@@ -16,8 +16,8 @@ upload()
     read commit_message
     git commit -m "$commit_message"
 
-    # is_success=$(git push | head -1)
-    backup=$(tmutil listlocalsnapshots / | head -1)
+    is_success=$(git push | tail -0)
+    # backup=$(tmutil listlocalsnapshots / | head -1)
     debug
     echo $is_success
 
