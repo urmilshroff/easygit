@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "\nWhat would you like to do?\n1. Upload all changes\n2. Download new changes"
+echo -e "\nWhat would you like to do?\n1. Refresh everything \n2. Upload all changes\n3. Download new changes"
 read choice
 
 upload()
@@ -9,19 +9,15 @@ upload()
     echo "What changes did you make since the last time you uploaded?"
     read commit_message
     git commit -m "$commit_message"
-    git push
-    
-    pid=$! # Process ID of the previous running command
-    spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
-    i=0
-    
-    while kill -0 $pid 2>/dev/null
-    do
-      i=$(( (i+1) %10 ))
-      printf "\r${spin:$i:1} Pushing to GitHub..."
-      sleep .1
-    done
-    echo "Successfully uploaded changed files!"
+    success=$(git push | tail -1)
+
+    if [ "$success" = "nothing to commit, working tree clean" ]
+    then
+        echo "Nothing new to push!"
+
+    else
+        echo "Successfully uploaded all changes!"
+    fi
 }
 
 download()
@@ -30,12 +26,20 @@ download()
     git pull
 }
 
+refresh()
+{
+    for output in $(git branch)
+    do
+        echo "Output is "
+    done
+}
+
 case $choice in
     1)
-        upload
+        refresh
         ;;
 
     2)
-        download
+        upload
         ;;
 esac
