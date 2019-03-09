@@ -21,7 +21,7 @@ upload()
     debug
     echo $is_success
 
-    if [ $is_success = "nothing to commit, working tree clean" ]
+    if [ "$is_success" = "nothing to commit, working tree clean" ]
     then
         echo "Nothing new to push!"
 
