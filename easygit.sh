@@ -1,17 +1,24 @@
 #!/bin/bash
 
-echo -e "\nWhat would you like to do?\n1. Refresh everything \n2. Upload all changes\n3. Download new changes"
-read choice
+debug()
+{
+    echo "Debug output starts"
+    echo $is_success
+    echo "Debug output ends"
+}
 
 upload()
 {
     git add .
+    
     echo "What changes did you make since the last time you uploaded?"
     read commit_message
     git commit -m "$commit_message"
-    success=$(git push | tail -1)
 
-    if [ "$success" = "nothing to commit, working tree clean" ]
+    is_success=$(git push | tail -1)
+    debug
+
+    if [ $is_success = "nothing to commit, working tree clean" ]
     then
         echo "Nothing new to push!"
 
@@ -33,6 +40,10 @@ refresh()
         echo "Output is "
     done
 }
+
+
+echo -e "\nWhat would you like to do?\n1. Refresh everything \n2. Upload all changes\n3. Download new changes"
+read choice
 
 case $choice in
     1)
