@@ -15,7 +15,7 @@ upload()
     read commit_message
     git commit -m "$commit_message"
 
-    is_success=$(git push | tail -1)
+    is_success=$(git push | head -1)
     debug
     echo $is_success
 
