@@ -11,10 +11,11 @@ debug()
 upload()
 {
     git add .
-    
+
     echo "What changes did you make since the last time you uploaded?"
     read commit_message
     git commit -m "$commit_message"
+    git push
 
     echo "Successfully uploaded all changes (if any!)"
 }
@@ -23,14 +24,19 @@ download()
 {
     git fetch
     git pull
+    
+    echo "Successfully downloaded all changes (if any!)"
 }
 
 refresh()
 {
-    for output in $(git branch)
-    do
-        echo "Output is "
-    done
+    # for output in $(git branch)
+    # do
+    #     echo "Output is "
+    # done
+    
+    upload
+    download
 }
 
 
@@ -48,5 +54,9 @@ case $choice in
 
     2)
         upload
+        ;;
+
+    3)
+        download
         ;;
 esac
