@@ -16,18 +16,7 @@ upload()
     read commit_message
     git commit -m "$commit_message"
 
-    is_success=$(git push | tail -0)
-    # backup=$(tmutil listlocalsnapshots / | head -1)
-    debug
-    echo $is_success
-
-    if [ "$is_success" = "nothing to commit, working tree clean" ]
-    then
-        echo "Nothing new to push!"
-
-    else
-        echo "Successfully uploaded all changes!"
-    fi
+    echo "Successfully uploaded all changes (if any!)"
 }
 
 download()
@@ -45,7 +34,11 @@ refresh()
 }
 
 
-echo -e "\nWhat would you like to do?\n1. Refresh everything \n2. Upload all changes\n3. Download new changes"
+echo -e "\nWhat would you like to do?"
+echo -e "1. Refresh everything"
+echo -e "2. Upload all changes"
+echo -e "3. Download new changes"
+
 read choice
 
 case $choice in
