@@ -2,22 +2,22 @@
 
 debug()
 {
-    echo "Debug output starts"
+    echo -e "\nDebug output starts"
     echo $is_success
     # echo $backup
-    echo "Debug output ends"
+    echo -e "\nDebug output ends"
 }
 
 upload()
 {
     git add .
 
-    echo "What changes did you make since the last time you uploaded?"
+    echo -e "\nWhat changes did you make since the last time you uploaded?"
     read commit_message
     git commit -m "$commit_message"
     git push
 
-    echo "Successfully uploaded all changes (if any!)"
+    echo -e "\nSuccessfully uploaded all changes (if any!)"
 }
 
 download()
@@ -25,7 +25,7 @@ download()
     git fetch
     git pull
     
-    echo "Successfully downloaded all changes (if any!)"
+    echo -e "\nSuccessfully downloaded all changes (if any!)"
 }
 
 refresh()
